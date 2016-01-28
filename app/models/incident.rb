@@ -21,6 +21,22 @@ class Incident < ApplicationRecord
     end
   end
 
+  def open?
+    !self.closed?
+  end
+
+  def monitoring?
+    self.state == 'monitoring'
+  end
+
+  def resolved?
+    self.state == 'resolved' || closed?
+  end
+
+  def self.closed?
+    self.state == 'closed'
+  end
+
   private def set_default
     self.meta ||= {}
   end
