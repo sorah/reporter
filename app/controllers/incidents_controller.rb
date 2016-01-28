@@ -30,6 +30,7 @@ class IncidentsController < ApplicationController
 
     respond_to do |format|
       if @incident.save
+        @incident.updates.create!(change: @incident.attributes)
         format.html { redirect_to @incident, notice: 'Incident was successfully created.' }
         format.json { render :show, status: :created, location: @incident }
       else
