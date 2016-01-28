@@ -43,11 +43,11 @@ class Incident < ApplicationRecord
 
     if self.state_changed?
       if self.state == 'open'
-        self.happened_at = self.created_at || Time.zone.now
+        self.happened_at = (self.created_at || Time.zone.now).change(sec: 0)
       end
       resolved_states = %w(resolved closed)
       if !resolved_states.include?(self.state_was) && resolved_states.include?(self.state)
-        self.resolved_at = Time.zone.now
+        self.resolved_at = Time.zone.now.change(sec: 0)
       end
     end
   end
