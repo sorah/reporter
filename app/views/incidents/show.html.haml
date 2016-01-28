@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @incident.title
+%p
+  %b State:
+  = @incident.state
+%p
+  %b Summary:
+  = @incident.summary
+%p
+  %b Happened at:
+  = @incident.happened_at
+%p
+  %b Resolved at:
+  = @incident.resolved_at
+%p
+  %b Meta:
+  = @incident.meta
+
+= link_to 'Edit', edit_incident_path(@incident)
+\|
+= link_to 'Back', incidents_path
