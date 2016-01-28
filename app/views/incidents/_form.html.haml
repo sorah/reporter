@@ -14,22 +14,27 @@
     = f.label :title, class: 'form-control-label col-sm-2'
     .col-sm-10
       = f.text_field :title, class: 'form-control'
+
   .form-group.row
     = f.label :state, class: 'form-control-label col-sm-2'
     .col-sm-10
       = f.select :state, Incident::STATES.keys, {}, class: 'c-select form-control'
+
   .form-group.row
     = f.label :summary, class: 'form-control-label col-sm-2'
     .col-sm-10
       = f.text_area :summary, class: 'form-control'
+
   .form-group.row
     = f.label :happened_at, class: 'form-control-label col-sm-2'
     .col-sm-10
       = f.datetime_select :happened_at
-  .form-group.row
-    = f.label :resolved_at, class: 'form-control-label col-sm-2'
-    .col-sm-10
-      = f.datetime_select :resolved_at
+
+  - if @incident.resolved?
+    .form-group.row
+      = f.label :resolved_at, class: 'form-control-label col-sm-2'
+      .col-sm-10
+        = f.datetime_select :resolved_at
   -#
     .form-group.row
       = f.label :meta, class: 'form-control-label col-sm-2'
