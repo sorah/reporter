@@ -17,32 +17,7 @@
     %h2 Updates
 
     - @incident.updates.order('created_at DESC').each do |update|
-      .row.update
-        .col-sm-2
-          = time_tag update.created_at
-        .col-sm-10
-          .update-head
-            %h3
-              - case update.change['state']
-              - when 'open'
-                Opened
-              - when 'monitoring'
-                Monitoring
-              - when 'resolved'
-                Resolved
-              - when 'closed'
-                Closed
-              - when nil
-                Update
-              - else 
-                = update.change['state']
-          .update-comment
-            - if update.comment
-              = render_markdown update.comment
-          .update-changes
-            %pre= update.change.to_yaml
-          
-
+      = render 'update', update: update
     -#
       .incident-meta
         %pre= @incident.meta.to_yaml
