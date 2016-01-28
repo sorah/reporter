@@ -1,1 +1,15 @@
 @import "bootstrap";
+
+.container {
+  max-width: 840px;
+  margin-top: 12px;
+}
+
+header.header {
+  .brand {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  margin-bottom: 24px;
+}
