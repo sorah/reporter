@@ -13,15 +13,15 @@
       .incident-summary
         = render_markdown @incident.summary
 
+      -#
+        .incident-meta
+          %pre= @incident.meta.to_yaml
+
   .incident-updates
     %h2 Updates
 
     - @incident.updates.order('created_at DESC').each do |update|
       = render 'update', update: update
-    -#
-      .incident-meta
-        %pre= @incident.meta.to_yaml
-
 
 = link_to 'Edit', edit_incident_path(@incident)
 \|
