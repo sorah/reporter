@@ -6,6 +6,7 @@ class Incident < ApplicationRecord
   has_many :updates
 
   before_validation :set_default
+  after_create :add_initial_update
 
   def record_action(actions, comment: nil)
     self.updates.create!(change: {}, actions: actions, comment: comment)
@@ -49,5 +50,9 @@ class Incident < ApplicationRecord
         self.resolved_at = Time.zone.now
       end
     end
+  end
+
+  private def add_initial_update
+    self.updates.create!(change: self.attributes)
   end
 end
