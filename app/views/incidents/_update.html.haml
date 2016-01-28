@@ -21,7 +21,7 @@
       - if update.comment
         = render_markdown update.comment
     .update-changes
-      - if update.change
+      - unless update.change&.empty?
         %button{class: 'btn btn-link update-changes_btn_show_full'} Show full changes
         %ul
           - update.change.each do |attr, value|
@@ -32,7 +32,7 @@
                 to
                 %code= value.inspect
     .update-changes-full{style: 'display: none;'}
-      - if update.change
+      - unless update.change&.empty?
         %button{class: 'btn btn-link update-changes_btn_show_summarized'} Show summarized changes
         %ul
           - update.change.each do |attr, value|
