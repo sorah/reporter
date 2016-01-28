@@ -1,24 +1,15 @@
-## README
+# Reporter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## todo
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- [ ] Open and close incidents
+- [ ] State management
+- [ ] GitHub Issues integration
+- [ ] Posting reports to share
+  - [ ] Post via GitHub
+- [ ] Sharing to chat
+- [ ] Generating emails
+- [ ] Generating 
+- [ ] Services support
+  - [ ] Microservices
+- [ ] Levels
