@@ -16,6 +16,10 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'revision_plate'
 
+gem 'html-pipeline'
+gem 'github-markdown'
+gem 'rinku'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'haml-rails'

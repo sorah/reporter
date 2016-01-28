@@ -25,6 +25,8 @@ class IncidentsController < ApplicationController
   # POST /incidents.json
   def create
     @incident = Incident.new(incident_params)
+    @incident.happened_at = Time.now
+    @incident.state = :open
 
     respond_to do |format|
       if @incident.save
@@ -69,6 +71,8 @@ class IncidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_params
-      params.require(:incident).permit(:title, :state, :summary, :happened_at, :resolved_at, :meta)
+      params.require(:incident).permit(:title, :summary, :happened_at, :meta).tap do |h|
+        h[:meta] = YAML.load(h[:meta]) if h[:meta]
+      end
     end
 end

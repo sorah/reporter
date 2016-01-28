@@ -6,23 +6,26 @@
         - @incident.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :state
-    = f.number_field :state
-  .field
-    = f.label :summary
-    = f.text_area :summary
-  .field
-    = f.label :happened_at
-    = f.datetime_select :happened_at
-  .field
-    = f.label :resolved_at
+  .form-group.row
+    = f.label :title, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :title, class: 'form-control'
+  .form-group.row
+    = f.label :summary, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.text_area :summary, class: 'form-control'
+  -#
+    .form-group.row
+      = f.label :happened_at, class: 'form-control-label col-sm-2'
+      .col-sm-10
+        = f.datetime_select :happened_at, class: 'form-control'
+  -#
+    .field
+      = f.label :resolved_at
     = f.datetime_select :resolved_at
-  .field
-    = f.label :meta
-    = f.text_area :meta
-  .actions
+  .form-group.row
+    = f.label :meta, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
+  .form-group.row
     = f.submit 'Save'

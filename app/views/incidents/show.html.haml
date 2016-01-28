@@ -1,23 +1,18 @@
-%p#notice= notice
+%section.incident.card
+  %h1.incident-title.card-header Incident: #{@incident.title}
 
-%p
-  %b Title:
-  = @incident.title
-%p
-  %b State:
-  = @incident.state
-%p
-  %b Summary:
-  = @incident.summary
-%p
-  %b Happened at:
-  = @incident.happened_at
-%p
-  %b Resolved at:
-  = @incident.resolved_at
-%p
-  %b Meta:
-  = @incident.meta
+  .incident-details.card-block
+    .incident-data
+      State: #{@incident.state},
+      Happened at: #{@incident.happened_at},
+      Resolved at: #{@incident.resolved_at}
+
+    .incident-summary
+      = render_markdown @incident.summary
+
+    -#
+      .incident-meta
+        %pre= @incident.meta.to_yaml
 
 = link_to 'Edit', edit_incident_path(@incident)
 \|

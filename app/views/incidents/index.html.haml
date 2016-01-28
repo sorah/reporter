@@ -1,31 +1,10 @@
-%h1 Listing incidents
+%h1 Incidents
 
-%table
-  %thead
-    %tr
-      %th Title
-      %th State
-      %th Summary
-      %th Happened at
-      %th Resolved at
-      %th Meta
-      %th
-      %th
-      %th
+%p
+  = link_to 'New Incident', new_incident_path
 
-  %tbody
-    - @incidents.each do |incident|
-      %tr
-        %td= incident.title
-        %td= incident.state
-        %td= incident.summary
-        %td= incident.happened_at
-        %td= incident.resolved_at
-        %td= incident.meta
-        %td= link_to 'Show', incident
-        %td= link_to 'Edit', edit_incident_path(incident)
-        %td= link_to 'Destroy', incident, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Incident', new_incident_path
+%section.incidents
+  %ul
+  - @incidents.each do |incident|
+    %li
+      = link_to incident.title, incident
