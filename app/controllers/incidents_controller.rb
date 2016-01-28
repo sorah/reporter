@@ -43,7 +43,7 @@ class IncidentsController < ApplicationController
   # PATCH/PUT /incidents/1.json
   def update
     respond_to do |format|
-      if @incident.update(incident_params)
+      if @incident.add_update(change: incident_params, comment: params[:comment])
         format.html { redirect_to @incident, notice: 'Incident was successfully updated.' }
         format.json { render :show, status: :ok, location: @incident }
       else
@@ -71,7 +71,7 @@ class IncidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_params
-      params.require(:incident).permit(:title, :summary, :happened_at, :meta).tap do |h|
+      params.require(:incident).permit(:title, :summary, :state, :happened_at, :resolved_at).tap do |h|
         h[:meta] = YAML.load(h[:meta]) if h[:meta]
       end
     end

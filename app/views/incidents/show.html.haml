@@ -1,18 +1,52 @@
-%section.incident.card
-  %h1.incident-title.card-header Incident: #{@incident.title}
+%section.incident
+  .card.incident-details
+    %h1.incident-title.card-header Incident: #{@incident.title}
 
-  .incident-details.card-block
-    .incident-data
-      State: #{@incident.state},
-      Happened at: #{@incident.happened_at},
-      Resolved at: #{@incident.resolved_at}
+    .card-block
+      .incident-data
+        State: #{@incident.state},
+        Happened at: #{@incident.happened_at},
+        Resolved at: #{@incident.resolved_at},
+        Reported at: #{@incident.created_at},
+        Last updated: #{@incident.updated_at}
 
-    .incident-summary
-      = render_markdown @incident.summary
+      .incident-summary
+        = render_markdown @incident.summary
+
+  .incident-updates
+    %h2 Updates
+
+    - @incident.updates.order('created_at DESC').each do |update|
+      .row.update
+        .col-sm-2
+          = time_tag update.created_at
+        .col-sm-10
+          .update-head
+            %h3
+              - case update.change['state']
+              - when 'open'
+                Opened
+              - when 'monitoring'
+                Monitoring
+              - when 'resolved'
+                Resolved
+              - when 'closed'
+                Closed
+              - when nil
+                Update
+              - else 
+                = update.change['state']
+          .update-comment
+            - if update.comment
+              = render_markdown update.comment
+          .update-changes
+            %pre= update.change.to_yaml
+          
 
     -#
       .incident-meta
         %pre= @incident.meta.to_yaml
+
 
 = link_to 'Edit', edit_incident_path(@incident)
 \|

@@ -7,25 +7,34 @@
           %li= msg
 
   .form-group.row
+    .col-sm-12
+      = text_area_tag :comment, nil, placeholder: 'Comment', class: 'form-control'
+
+  .form-group.row
     = f.label :title, class: 'form-control-label col-sm-2'
     .col-sm-10
       = f.text_field :title, class: 'form-control'
   .form-group.row
+    = f.label :state, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.select :state, Incident::STATES.keys, {}, class: 'c-select form-control'
+  .form-group.row
     = f.label :summary, class: 'form-control-label col-sm-2'
     .col-sm-10
       = f.text_area :summary, class: 'form-control'
+  .form-group.row
+    = f.label :happened_at, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.datetime_select :happened_at
+  .form-group.row
+    = f.label :resolved_at, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.datetime_select :resolved_at
   -#
     .form-group.row
-      = f.label :happened_at, class: 'form-control-label col-sm-2'
+      = f.label :meta, class: 'form-control-label col-sm-2'
       .col-sm-10
-        = f.datetime_select :happened_at, class: 'form-control'
-  -#
-    .field
-      = f.label :resolved_at
-    = f.datetime_select :resolved_at
+        = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
   .form-group.row
-    = f.label :meta, class: 'form-control-label col-sm-2'
-    .col-sm-10
-      = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
-  .form-group.row
-    = f.submit 'Save'
+    .col-sm-2
+      = f.submit 'Save', class: 'btn btn-primary form-control'

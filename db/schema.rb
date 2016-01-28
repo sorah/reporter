@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128142524) do
+ActiveRecord::Schema.define(version: 20160128170634) do
 
   create_table "incidents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20160128142524) do
     t.datetime "happened_at"
     t.datetime "resolved_at"
     t.text     "meta",        limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "updates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "incident_id"
+    t.text     "change",      limit: 65535
+    t.text     "comment",     limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
