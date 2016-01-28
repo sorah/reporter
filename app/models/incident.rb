@@ -5,7 +5,7 @@ class Incident < ApplicationRecord
 
   has_many :updates
 
-  before_save :set_default
+  before_validation :set_default
 
   def record_action(actions, comment: nil)
     self.updates.create!(change: {}, actions: actions, comment: comment)
@@ -39,5 +39,15 @@ class Incident < ApplicationRecord
 
   private def set_default
     self.meta ||= {}
+
+    if self.state_changed?
+      if self.state == 'open'
+        self.happened_at = self.created_at || Time.zone.now
+      end
+      resolved_states = %w(resolved closed)
+      if !resolved_states.include?(self.state_was) && resolved_states.include?(self.state)
+        self.resolved_at = Time.zone.now
+      end
+    end
   end
 end
