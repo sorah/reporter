@@ -21,6 +21,27 @@
       - if update.comment
         = render_markdown update.comment
     .update-changes
-      %pre= update.change.to_yaml
+      - if update.change
+        %button{class: 'btn btn-link update-changes_btn_show_full'} Show full changes
+        %ul
+          - update.change.each do |attr, value|
+            %li
+              %code #{attr}
+              changed
+              - if attr != 'summary'
+                to
+                %code= value.inspect
+    .update-changes-full{style: 'display: none;'}
+      - if update.change
+        %button{class: 'btn btn-link update-changes_btn_show_summarized'} Show summarized changes
+        %ul
+          - update.change.each do |attr, value|
+            %li
+              = attr
+              %pre
+                - if value.kind_of?(String)
+                  = value
+                - else
+                  = value.to_yaml
 
 
