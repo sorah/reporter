@@ -19,7 +19,7 @@
           %pre= @incident.meta.to_yaml
 
   .incident-updates
-    %h2 Updates
+    = render 'form', hide_extra_field: !@incident.updates.empty?
 
     - @incident.updates.order('created_at DESC').each do |update|
       = render 'update', update: update

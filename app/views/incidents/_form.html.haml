@@ -1,3 +1,4 @@
+- hide_extra_field ||= false
 = form_for @incident do |f|
   - if @incident.errors.any?
     #error_explanation
@@ -10,7 +11,7 @@
     .col-sm-12
       = text_area_tag :comment, nil, placeholder: 'Comment', class: 'form-control'
 
-  %section.incident_extra_field_edit
+  %section.incident_extra_field_edit{style: hide_extra_field ? "display: none;" : ""}
     .form-group.row
       = f.label :state, class: 'form-control-label col-sm-2'
       .col-sm-3
@@ -49,5 +50,9 @@
           = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
 
   .form-group.row
+    .col-sm-2
+      - if hide_extra_field
+        %button.show_incident_extra_field_edit.btn.btn-link Edit detail...
+    .col-sm-8
     .col-sm-2
       = f.submit 'Update', class: 'btn btn-primary form-control'
