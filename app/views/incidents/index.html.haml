@@ -4,7 +4,12 @@
   = link_to 'New Incident', new_incident_path
 
 %section.incidents
-  %ul
   - @incidents.each do |incident|
-    %li
-      = link_to incident.title, incident
+    .row
+      .col-md-2
+        #{l(incident.created_at, format: :short)}
+      .col-md-10
+        = link_to incident do
+          #{incident.type_name}: #{incident.title}
+
+

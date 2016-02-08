@@ -23,6 +23,10 @@ class Incident < ApplicationRecord
     end
   end
 
+  def type_name
+    type ? type.name : 'Incident'.freeze
+  end
+
   def open?
     !self.closed?
   end
