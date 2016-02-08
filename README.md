@@ -4,8 +4,10 @@
 
 - [x] State management
   - [x] Open and close incidents
-- [ ] Types
-- [ ] Levels
+- [ ] Type and Levels
+  - [x] Manage types
+  - [ ] Auto action suggestion
+  - [ ] Auto channel suggestion
 - [ ] Channels
   - [ ] Sharing to chat
 - [ ] Actions
@@ -18,4 +20,5 @@
 - [ ] GitHub Issues integration
 - [ ] Posting final reports
 - [ ] Status page
+- [ ] login
 - [ ] UI Design
