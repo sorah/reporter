@@ -12,7 +12,8 @@
   - [ ] Determine by type/level
   - [ ] Generating emails
 - [ ] Services
-  - [ ] Microservices
+  - [ ] Dependencies
+  - [ ] Expected affects
 - [ ] GitHub Issues integration
 - [ ] Posting final reports
 - [ ] Status page
