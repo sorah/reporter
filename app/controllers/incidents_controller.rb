@@ -71,7 +71,7 @@ class IncidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_params
-      params.require(:incident).permit(:title, :summary, :state, :happened_at, :resolved_at).tap do |h|
+      params.require(:incident).permit(:title, :summary, :state, :happened_at, :resolved_at, :type_id, :level).tap do |h|
         h[:meta] = YAML.load(h[:meta]) if h[:meta]
       end
     end

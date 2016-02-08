@@ -1,9 +1,10 @@
 %section.incident
   .card.incident-details
-    %h1.incident-title.card-header Incident: #{@incident.title}
+    %h1.incident-title.card-header #{@incident.type ? @incident.type.name : 'Incident'.freeze}: #{@incident.title}
 
     .card-block
       .incident-data
+        Level: #{@incident.level},
         State: #{@incident.state},
         Happened at: #{@incident.happened_at},
         Resolved at: #{@incident.resolved_at},

@@ -10,36 +10,44 @@
     .col-sm-12
       = text_area_tag :comment, nil, placeholder: 'Comment', class: 'form-control'
 
-  .form-group.row
-    = f.label :title, class: 'form-control-label col-sm-2'
-    .col-sm-10
-      = f.text_field :title, class: 'form-control'
-
-  .form-group.row
-    = f.label :state, class: 'form-control-label col-sm-2'
-    .col-sm-10
-      = f.select :state, Incident::STATES.keys, {}, class: 'c-select form-control'
-
-  .form-group.row
-    = f.label :summary, class: 'form-control-label col-sm-2'
-    .col-sm-10
-      = f.text_area :summary, class: 'form-control'
-
-  .form-group.row
-    = f.label :happened_at, class: 'form-control-label col-sm-2'
-    .col-sm-10
-      = f.datetime_select :happened_at
-
-  - if @incident.resolved?
+  %section.incident_extra_field_edit
     .form-group.row
-      = f.label :resolved_at, class: 'form-control-label col-sm-2'
-      .col-sm-10
-        = f.datetime_select :resolved_at
-  -#
+      = f.label :state, class: 'form-control-label col-sm-2'
+      .col-sm-3
+        = f.select :state, Incident::STATES.keys, {}, class: 'c-select form-control'
+      = f.label :type_id, class: 'form-control-label col-sm-1'
+      .col-sm-3
+        = f.select :type_id, IncidentType.all.map { |_| [_.name, _.id] }, {}, class: 'c-select form-control'
+      = f.label :level, class: 'form-control-label col-sm-1'
+      .col-sm-2
+        = f.number_field :level, class: 'form-control'
+
     .form-group.row
-      = f.label :meta, class: 'form-control-label col-sm-2'
+      = f.label :title, class: 'form-control-label col-sm-2'
       .col-sm-10
-        = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
+        = f.text_field :title, class: 'form-control'
+
+    .form-group.row
+      = f.label :summary, class: 'form-control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :summary, class: 'form-control'
+
+    .form-group.row
+      = f.label :happened_at, class: 'form-control-label col-sm-2'
+      .col-sm-10
+        = f.datetime_select :happened_at
+
+    - if @incident.resolved?
+      .form-group.row
+        = f.label :resolved_at, class: 'form-control-label col-sm-2'
+        .col-sm-10
+          = f.datetime_select :resolved_at
+    -#
+      .form-group.row
+        = f.label :meta, class: 'form-control-label col-sm-2'
+        .col-sm-10
+          = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
+
   .form-group.row
     .col-sm-2
-      = f.submit 'Save', class: 'btn btn-primary form-control'
+      = f.submit 'Update', class: 'btn btn-primary form-control'

@@ -4,6 +4,7 @@ class Incident < ApplicationRecord
   enum state: STATES
 
   has_many :updates
+  belongs_to :type, class_name: 'IncidentType'
 
   before_validation :set_default
   after_create :add_initial_update

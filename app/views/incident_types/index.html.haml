@@ -1,0 +1,12 @@
+%h1 Incident types
+
+%p= link_to 'New Incident type', new_incident_type_path
+
+- @incident_types.each do |incident_type|
+  %h2= link_to incident_type.name, incident_type
+  %p= incident_type.description
+
+  %p
+    = link_to 'Edit', edit_incident_type_path(incident_type)
+    |
+    = link_to 'Destroy', incident_type, :method => :delete, :data => { :confirm => 'Are you sure?' }

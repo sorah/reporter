@@ -7,6 +7,10 @@
       %ul
         - @incident.errors.full_messages.each do |msg|
           %li= msg
+
+  .form-group.row
+    .col-md-2
+      = f.select :type_id, IncidentType.all.map { |_| [_.name, _.id] }, {}, class: 'form-control form-control-lg c-select'
   .form-group.row
     = f.text_field :title, class: 'form-control form-control-lg', placeholder: 'Title'
   .form-group.row
