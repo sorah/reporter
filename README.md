@@ -9,7 +9,9 @@
   - [ ] Auto action suggestion
   - [ ] Auto channel suggestion
 - [ ] Channels
+  - [ ] Emailing
   - [ ] Sharing to chat
+  - [ ] tie to Services
 - [ ] Actions
   - [ ] Determine by type/level
   - [ ] Generating emails
