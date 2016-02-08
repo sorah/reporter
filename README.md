@@ -2,16 +2,18 @@
 
 ## todo
 
-- [x] Open and close incidents
-- [ ] State management
-- [ ] GitHub Issues integration
-- [ ] Posting reports to share
-  - [ ] Post via GitHub
+- [x] State management
+  - [x] Open and close incidents
+- [ ] Types
 - [ ] Levels
 - [ ] Channels
   - [ ] Sharing to chat
 - [ ] Actions
+  - [ ] Determine by type/level
   - [ ] Generating emails
 - [ ] Services
   - [ ] Microservices
+- [ ] GitHub Issues integration
+- [ ] Posting final reports
+- [ ] Status page
 - [ ] UI Design
