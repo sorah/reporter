@@ -62,6 +62,7 @@ class IncidentTypesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_incident_type
       @incident_type = IncidentType.find(params[:id])
@@ -69,6 +70,8 @@ class IncidentTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_type_params
-      params.require(:incident_type).permit(:name, :description)
+      params.require(:incident_type).permit(:name, :description, :meta).tap do |h|
+        h[:meta] = YAML.load(h[:meta]) if h[:meta]
+      end
     end
 end
