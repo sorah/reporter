@@ -44,11 +44,18 @@ class Incident < ApplicationRecord
     self.state == 'closed'
   end
 
-  def channel_ids
-    [
-      *self.meta&.fetch(:channel_ids, []),
-      *self.type&.level_definition(self.level).fetch(:channel_ids),
-    ]
+  def channel_suggestions
+    suggestions_base = [
+      *self.meta&.fetch(:channels, []),
+      *self.type&.level_definition(self.level).fetch(:channels),
+    ].map do |suggestion|
+      suggestion = suggestion.kind_of?(Integer) ? {id: suggestion} : suggestion
+      [suggestion[:id], suggestion]
+    end.to_h
+
+    Channel.where(id: suggestions_base.keys).map do |channel|
+      suggestions_base[channel.id].merge(channel: channel)
+    end
   end
 
   def channels

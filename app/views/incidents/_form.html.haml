@@ -54,8 +54,9 @@
       - if hide_extra_field
         %button.show_incident_extra_field_edit.btn.btn-link Edit detail...
     .col-sm-8
-      - @incident.channels.each do |ch|
-        = check_box_tag "notified_channels[#{ch.id}]", '1', true
-        = label_tag "notified_channels[#{ch.id}]", ch.name
+      - @incident.channel_suggestions.each do |suggestion|
+        = check_box_tag "notified_channels[#{suggestion[:channel].id}]", '1', suggestion.fetch(:default, true)
+        = label_tag "notified_channels[#{suggestion[:channel].id}]", suggestion[:channel].name
+
     .col-sm-2
       = f.submit 'Update', class: 'btn btn-primary form-control'

@@ -8,21 +8,20 @@ class IncidentType < ApplicationRecord
 
   def level_definition(level)
     0.upto(level).inject(default_level_definition) do |definition, level|
-      leveldef = level_definition_specific(level)
+      leveldef = (level_definitions[level.to_i] || level_definitions[level.to_s])&.deep_symbolize_keys
+      next definition unless leveldef
 
-      definition[:channel_ids].push(*leveldef[:channel_ids])
+      definition[:channels].push(*leveldef[:channels])
 
       definition
+    end.tap do |definition|
+      definition[:channels].map! { |_| _.kind_of?(Integer) ? {id: _} : _ }
     end
-  end
-
-  def level_definition_specific(level)
-    default_level_definition.merge((level_definitions[level.to_i] || level_definitions[level.to_s] || {}).symbolize_keys)
   end
 
   private def default_level_definition
     {
-      channel_ids: []
+      channels: []
     }
   end
 
