@@ -8,9 +8,9 @@
   - [x] Manage types
   - [ ] Auto action suggestion
   - [ ] Auto channel suggestion
-- [ ] Channels
+- [x] Channels
   - [ ] Emailing
-  - [ ] Sharing to chat
+  - [x] Sharing to chat
   - [ ] tie to Services
 - [ ] Actions
   - [ ] Determine by type/level
