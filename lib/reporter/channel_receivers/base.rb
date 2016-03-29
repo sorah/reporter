@@ -1,5 +1,7 @@
 module ChannelReceivers
   class Base
+    include Rails.application.routes.url_helpers
+
     def initialize
     end
 
@@ -10,6 +12,10 @@ module ChannelReceivers
       else
         raise TypeError, "unsupported notification for #{something.class}"
       end
+    end
+
+    def url_options
+      Rails.application.config.channel_receiver_default_url_options || {}
     end
 
     private

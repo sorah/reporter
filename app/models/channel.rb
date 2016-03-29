@@ -6,7 +6,7 @@ class Channel < ApplicationRecord
   delegate :notify, to: :receiver
 
   def receiver
-    receiver_class.new(**(params || {}))
+    receiver_class.new(**(params || {}).symbolize_keys)
   end
   
   def receiver_class
