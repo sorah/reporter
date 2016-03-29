@@ -47,6 +47,7 @@ class Incident < ApplicationRecord
   def channel_ids
     [
       *self.meta&.fetch(:channel_ids, []),
+      *self.type&.level_definition(self.level).fetch(:channel_ids),
     ]
   end
 
