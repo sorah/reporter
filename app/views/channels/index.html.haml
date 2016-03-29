@@ -1,0 +1,11 @@
+%h1 Channels
+
+%p
+  = link_to 'New Channel', new_channel_path
+
+%section.channels
+  %ul
+    - @channels.each do |channel|
+      %li
+        = link_to channel do
+          #{channel.name}

@@ -20,6 +20,10 @@ gem 'html-pipeline'
 gem 'github-markdown'
 gem 'rinku'
 
+group :channel_hipchat do
+  gem 'hipchat'
+end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'haml-rails'

@@ -1,0 +1,9 @@
+%section.channel
+  %h2 Channel: #{@channel.name}
+  %p
+    Receiver: #{@channel.receiver_class.inspect}
+  %p
+    %pre= @channel.params.to_yaml
+
+= link_to 'Edit', edit_channel_path(@channel)
+= link_to 'Delete', channel_path(@channel), method: :delete, data: { confirm: 'Sure?' }

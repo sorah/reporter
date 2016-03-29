@@ -1,0 +1,26 @@
+= form_for @channel do |f|
+  - if @channel.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@channel.errors.count, "error")} prohibited this channel from being saved:"
+      %ul
+        - @channel.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group.row
+    = f.label :name, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :name, class: 'form-control'
+
+  .form-group.row
+    = f.label :recevier_name, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :receiver_name, class: 'form-control'
+
+  .form-group.row
+    = f.label :params, class: 'form-control-label col-sm-2'
+    .col-sm-10
+      = f.text_area :params, value: (@channel.params || {}).to_yaml, class: 'form-control'
+
+  .form-group.row
+    .col-sm-2
+      = f.submit 'Save', class: 'btn btn-primary form-control'
