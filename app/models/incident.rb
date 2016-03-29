@@ -16,8 +16,9 @@ class Incident < ApplicationRecord
   def add_update(change: {}, actions: [], comment: nil)
     self.assign_attributes(change)
     if self.valid?
-      self.updates.create!(change: self.changes.map { |k, v| [k, v[1]] }.to_h, actions: actions, comment: comment)
+      update = self.updates.create!(change: self.changes.map { |k, v| [k, v[1]] }.to_h, actions: actions, comment: comment)
       self.save!
+      update
     else
       false
     end

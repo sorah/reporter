@@ -54,5 +54,8 @@
       - if hide_extra_field
         %button.show_incident_extra_field_edit.btn.btn-link Edit detail...
     .col-sm-8
+      - Channel.all.each do |ch|
+        = check_box_tag "notified_channels[#{ch.id}]"
+        = label_tag "notified_channels[#{ch.id}]", ch.name
     .col-sm-2
       = f.submit 'Update', class: 'btn btn-primary form-control'

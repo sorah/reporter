@@ -43,7 +43,11 @@ class IncidentsController < ApplicationController
   # PATCH/PUT /incidents/1.json
   def update
     respond_to do |format|
-      if @incident.add_update(change: incident_params, comment: params[:comment])
+      if update = @incident.add_update(change: incident_params, comment: params[:comment])
+        notified_channels.each do |ch|
+          ch.notify(update)
+        end
+
         format.html { redirect_to @incident, notice: 'Incident was successfully updated.' }
         format.json { render :show, status: :ok, location: @incident }
       else
@@ -74,5 +78,14 @@ class IncidentsController < ApplicationController
       params.require(:incident).permit(:title, :summary, :state, :happened_at, :resolved_at, :type_id, :level).tap do |h|
         h[:meta] = YAML.load(h[:meta]) if h[:meta]
       end
+    end
+
+    def notified_channels_params
+      params[:notified_channels] || {}
+    end
+
+    def notified_channels
+      # XXX: type validation
+      Channel.where(id: notified_channels_params.keys)
     end
 end
