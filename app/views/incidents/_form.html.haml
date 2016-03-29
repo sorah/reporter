@@ -43,19 +43,19 @@
         = f.label :resolved_at, class: 'form-control-label col-sm-2'
         .col-sm-10
           = f.datetime_select :resolved_at
-    -#
-      .form-group.row
-        = f.label :meta, class: 'form-control-label col-sm-2'
-        .col-sm-10
-          = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
+
+    .form-group.row
+      = f.label :meta, class: 'form-control-label col-sm-2'
+      .col-sm-10
+        = f.text_area :meta, value: @incident.meta.to_yaml, class: 'form-control'
 
   .form-group.row
     .col-sm-2
       - if hide_extra_field
         %button.show_incident_extra_field_edit.btn.btn-link Edit detail...
     .col-sm-8
-      - Channel.all.each do |ch|
-        = check_box_tag "notified_channels[#{ch.id}]"
+      - @incident.channels.each do |ch|
+        = check_box_tag "notified_channels[#{ch.id}]", '1', true
         = label_tag "notified_channels[#{ch.id}]", ch.name
     .col-sm-2
       = f.submit 'Update', class: 'btn btn-primary form-control'

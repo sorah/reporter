@@ -44,6 +44,16 @@ class Incident < ApplicationRecord
     self.state == 'closed'
   end
 
+  def channel_ids
+    [
+      *self.meta&.fetch(:channel_ids, []),
+    ]
+  end
+
+  def channels
+    Channel.where(id: channel_ids)
+  end
+
   private def set_default
     self.meta ||= {}
 
